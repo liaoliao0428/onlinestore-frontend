@@ -1,4 +1,4 @@
-const ProductImage = () => {
+const ProductImage = (props) => {
     return (
         // productImage
         <div className="productImage">

@@ -8,14 +8,13 @@ import './index.css';
 
 // components 一般組件
 import Header from './components/Header'; // 頭(搜尋bar、使用者登入/資訊)
-import Category from './components/Category'; // 分類標籤
+import Categorys from './components/Categorys'; // 分類標籤
 import Footer from './components/Footer'; // 底層介紹
 
 // components 路由組件
 import Index from './pages/Index'; // 首頁
 import Product from './pages/Product'; // 單個商品頁面
 
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,7 +24,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Header />
-      <Category />
+      <Categorys />
       {/* 註冊路由 */}
       <Routes >
           {/* 無指定路由就帶到首頁 */}
@@ -33,7 +32,9 @@ root.render(
           {/* 首頁 */}
           <Route path='/index' element={<Index />}/>
           {/* 單商品頁 */}
-          <Route path='/product' element={<Product />}/>
+          <Route path='/product/:productId' element={<Product />}/>
+          {/* 指定分類頁 */}
+          <Route path='/category/:categoryId' element={<Index />}/>
       </Routes> 
       {/* 註冊路由 */}
       <Footer />

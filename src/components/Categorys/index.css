@@ -1,17 +1,17 @@
 /* category */
-.category {
+.categorys {
     margin-top: 10px;
 }
 
-.category nav{
+.categorys nav{
     text-align: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: auto;
     font-size: 0;
 }
 
-.category nav a{
+.categorys nav a{
     padding: 10px 0;
     color: black;
     font-size: 20px;
@@ -20,7 +20,7 @@
     text-decoration: none;
 }
 
-.category nav a:hover{
+.categorys nav a:hover{
     transition: .3s;
     background-color: #e7e7e7;
 }
