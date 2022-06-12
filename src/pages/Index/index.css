@@ -24,10 +24,25 @@
 .products .wrap .item{
     width: 200px;
     display: inline-block;
-    text-align: center;
+    text-align: start;
     border: 1px solid #cacacaa5;
     padding: 10px;
     margin: 10px 10px;
+}
+
+.products .wrap .item img{
+    width: 200px;
+    height: 200px;
+}   
+
+.products .wrap .item h3{
+    margin-top: 5px;
+}
+
+.products .wrap .item p{
+    margin-top: 10px;
+    font-size: 20px;
+    color: #0a5b8a;
 }
 
 .products .wrap .item:hover{
