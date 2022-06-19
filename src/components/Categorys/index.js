@@ -14,22 +14,25 @@ import './index.css';
 // 組件
 import Category from './components/Category.js';
 
-// 取得所有分類
-const getCategorys = async (setCategory) => {
-    let url = `${URL}/category/all`
-    let response = await axios.post(url)
-    const { category } = response.data
-    setCategory(category)
-}
+
 
 // Categorys組件
 const Categorys = () => {
+
     // 建立categorys hook
     const [categorys, setCategorys] = useState([])
 
+    // 取得所有分類
+    const getCategorys = async () => {
+        let url = `${URL}/category/all`
+        let response = await axios.post(url)
+        const { category } = response.data
+        setCategorys(category)
+    }
+
     // 用useEffect生命週期概念一開始先抓分類資料
     useEffect(() => {
-        getCategorys(setCategorys)
+        getCategorys()
     }, []);
 
     return (
