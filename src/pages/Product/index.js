@@ -17,25 +17,30 @@ import './index.css';
 import ProductImage from './components/ProductImage.js';
 import Buyinfo from './components/Buyinfo.js';
 
-const getProductDetail = async (productId, setProductDetail) => {
-    let url = `${URL}/product/detail`
-    let response = await axios.post(url,{
-        productId: productId
-    })
-    let { productDetail } = response.data
-    setProductDetail(productDetail)
-}
-
 const Product = () => {
     let { productId } = useParams()
 
-    const [productDetail , setProductDetail] = useState([])
+    const [product , setProduct] = useState([])
+    const [detail , setDetail] = useState([])
+    const [images , setImages] = useState([])
+
+    // 撈商品細項資料
+    const getProductDetail = async (productId) => {
+        let url = `${URL}/product/detail`
+        let response = await axios.post(url,{
+            productId: productId
+        })
+
+        const { product, detail, images } = response.data.productDetail
+
+        setProduct(product)
+        setDetail(detail)
+        setImages(images)
+    }
 
     useEffect(() => {
-        getProductDetail(productId, setProductDetail)
-    }, [productId]);
-
-    const { product, detail, images } = productDetail
+        getProductDetail(productId)
+    }, []);
 
     return (
         <div className="product">
