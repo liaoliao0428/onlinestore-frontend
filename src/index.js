@@ -14,6 +14,7 @@ import Footer from './components/Footer'; // 底層介紹
 // components 路由組件
 import Index from './pages/Index'; // 首頁
 import Product from './pages/Product'; // 單個商品頁面
+import Login from './pages/Login'; // 登入頁面
 
 import reportWebVitals from './reportWebVitals';
 
@@ -35,6 +36,8 @@ root.render(
           <Route path='/product/:productId' element={<Product />}/>
           {/* 指定分類頁 */}
           <Route path='/category/:categoryId' element={<Index />}/>
+          {/* 登入 */}
+          <Route path='/login/*' element={<Login />}/>
       </Routes> 
       {/* 註冊路由 */}
       <Footer />
