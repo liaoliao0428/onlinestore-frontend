@@ -12,9 +12,6 @@ import { URL } from '../../../global/url'
 
 import Item from './Item'
 
-
-
-
 const Products = (props) => {
     let { categoryId } = props
 

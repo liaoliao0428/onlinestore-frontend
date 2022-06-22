@@ -1,6 +1,11 @@
-import './index.css';
+// 路由組件
+import { Link } from 'react-router-dom'
+// fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+
+import './index.css';
+
 
 const Header = () => {
     return (
@@ -16,7 +21,7 @@ const Header = () => {
                 </div>
                 {/* userinfo */}
                 <div className="userinfo">
-                    <a type="button" className="login-logout" href="">登入/註冊</a>
+                    <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
                     <a href="" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></a>
                 </div>
             </div>        

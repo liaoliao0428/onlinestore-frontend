@@ -3,8 +3,6 @@ import { useState , useEffect , useRef , useCallback } from 'react'
 // uuid套件
 import { v4 } from 'uuid'
 
-import { useLocation } from 'react-router-dom';
-
 const Buyinfo = ( props ) => {
 
     const { product , detail } = props
