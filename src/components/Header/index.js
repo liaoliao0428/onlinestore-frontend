@@ -3,11 +3,60 @@ import { Link } from 'react-router-dom'
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+// hooks
+import { useState , useEffect } from 'react'
+// cookies
+import Cookies from 'universal-cookie';
+// axios套件
+import axios from 'axios'
+
+// URL
+import { URL } from '../../global/url'
+
+
 
 import './index.css';
 
 
 const Header = () => {
+    const [accessToken , setAccessToken] = useState('')
+    const [loginState , setLoginState] = useState(1)
+    const [userImage , setUserImage] = useState('http://fakeimg.pl/30x30')
+    const [userName , setUserName] = useState('testUser')
+    const cookies = new Cookies();
+
+    useEffect(() => {
+        let mail = cookies.get('mail')
+        let token = cookies.get('accessToken')
+        getUserInfo(mail , token)
+    }, []);
+
+    // 取得使用者基本資料
+    const getUserInfo = async (mail , token) => {
+        let url = `${URL}/user/getUserBasicData`
+        let response = await axios.post(url,{
+            mail: mail,
+            token: token
+        })
+
+        if(response.data.userBasicData.userImage){
+            setUserImage(response.data.userBasicData.userImage)
+        }
+        setUserName(response.data.userBasicData.userName)
+        
+        if(userImage && userName){
+            setLoginState(1)
+        }
+    }
+
+    let loginComponent
+    {
+        if(loginState == 0)
+            loginComponent = <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
+        else
+            loginComponent = <Link type="button" className="userIcon" to="/login"><img src={userImage} alt="" /><p>{userName}</p></Link>
+    } 
+
     return (
         // header
         <div className="header">
@@ -21,7 +70,9 @@ const Header = () => {
                 </div>
                 {/* userinfo */}
                 <div className="userinfo">
-                    <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
+                    {loginComponent}
+                    
+                    {/* <Link type="button" className="login-logout" to="/login">登入/註冊</Link> */}
                     <a href="" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></a>
                 </div>
             </div>        
