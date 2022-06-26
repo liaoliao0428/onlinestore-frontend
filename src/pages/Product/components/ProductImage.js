@@ -13,7 +13,10 @@ const ProductImage = (props) => {
     }
 
     useEffect(() => {
-        images[0] ? changeMainImage(images[0].image) : null
+        if(images[0]){
+            changeMainImage(images[0].image)
+        }
+        // images[0] ? changeMainImage(images[0].image) : null
     }, [ images ]);    
 
     return (
@@ -24,7 +27,7 @@ const ProductImage = (props) => {
             </div>
             <div className="smallImage">
                 {
-                    images.map(item => <button key={ v4() } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button>)
+                    images.map(item => <div><button key={ v4() } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button></div>)
                 }
             </div>
         </div>
