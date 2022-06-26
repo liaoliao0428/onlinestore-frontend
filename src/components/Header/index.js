@@ -19,24 +19,23 @@ import './index.css';
 
 
 const Header = () => {
-    const [accessToken , setAccessToken] = useState('')
-    const [loginState , setLoginState] = useState(1)
+    const [loginState , setLoginState] = useState(0)
     const [userImage , setUserImage] = useState('http://fakeimg.pl/30x30')
     const [userName , setUserName] = useState('testUser')
     const cookies = new Cookies();
 
     useEffect(() => {
-        let mail = cookies.get('mail')
-        let token = cookies.get('accessToken')
-        getUserInfo(mail , token)
+        let accessToken = cookies.get('accessToken')
+        if(accessToken){
+            getUserInfo(accessToken)
+        }        
     }, []);
 
     // 取得使用者基本資料
-    const getUserInfo = async (mail , token) => {
+    const getUserInfo = async (accessToken) => {
         let url = `${URL}/user/getUserBasicData`
         let response = await axios.post(url,{
-            mail: mail,
-            token: token
+            accessToken: accessToken
         })
 
         if(response.data.userBasicData.userImage){
@@ -71,8 +70,6 @@ const Header = () => {
                 {/* userinfo */}
                 <div className="userinfo">
                     {loginComponent}
-                    
-                    {/* <Link type="button" className="login-logout" to="/login">登入/註冊</Link> */}
                     <a href="" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></a>
                 </div>
             </div>        
