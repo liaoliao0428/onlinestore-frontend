@@ -1,0 +1,33 @@
+/* footer */
+.footer {
+    background-color: #dedede;
+    margin-top: 15px;
+    padding: 5px 0;
+}
+
+.footer .wrap{
+    text-align: justify;
+    color: #4d4d4d;
+    padding: 20px 0;
+    border-bottom: 1px solid #79797990;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer .wrap .link a{
+    color: #000;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.footer .wrap h3{
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 17px;
+}
+
+.footer .dseign{
+    width: 1250px;
+    margin: 10px auto;
+    color: #4d4d4d;
+}

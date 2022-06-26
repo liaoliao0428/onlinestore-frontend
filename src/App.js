@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+import {} from '@fortawesome/free-brands-svg-icons'
+
 function App() {
   return (
     <div className="App">
