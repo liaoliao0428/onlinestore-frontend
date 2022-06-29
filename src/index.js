@@ -36,7 +36,7 @@ root.render(
     <BrowserRouter>
       <Header />
       <Categorys />
-      <div style={{height: "100vh"}}>
+      {/* <div style={{height: "100vh"}}> */}
         {/* 註冊路由 */}
         <Routes >
             {/* 無指定路由就帶到首頁 */}
@@ -50,15 +50,10 @@ root.render(
             {/* 登入 */}
             <Route path='/login/*' element={<Login />}/>
             {/* 會員頁面 */}
-            <Route path='/user' element={<User />}>
-              {/* <Route index element={<UserInfo />}/> */}
-              <Route path='userInfo' element={<UserInfo />}/>
-              <Route path='address' element={<Address />}/>
-              <Route path='order' element={<Order />}/>
-            </Route>
+            <Route path='/user/*' element={<User />} />
         </Routes> 
         {/* 註冊路由 */}
-      </div>
+      {/* </div> */}
       <Footer />
     </BrowserRouter>
   </React.StrictMode>    

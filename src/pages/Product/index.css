@@ -24,6 +24,7 @@
 
 .product .wrap .productImage .smallImage {
     margin-top: 10px;
+    display: flex;
 }
 
 .product .wrap .productImage .smallImage button {

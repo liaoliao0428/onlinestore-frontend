@@ -33,7 +33,7 @@ const ProductImage = (props) => {
             </div>
             <div className="smallImage">
                 {
-                    images.map(item => <button key={ v4() } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button>)
+                    images.map(item => <div><button key={ v4() } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button></div>)
                 }
             </div>
         </div>
