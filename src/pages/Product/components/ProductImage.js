@@ -13,10 +13,16 @@ const ProductImage = (props) => {
     }
 
     useEffect(() => {
+
         if(images[0]){
             changeMainImage(images[0].image)
-        }
-        // images[0] ? changeMainImage(images[0].image) : null
+
+        }    
+
+        //  images[0] ? changeMainImage(images[0].image) : null
+
+
+
     }, [ images ]);    
 
     return (
