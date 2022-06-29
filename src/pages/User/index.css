@@ -1,0 +1,47 @@
+/* User */
+.user {
+    margin: 20px 0 0 0;
+    padding-top: 30px;
+    border-top: 1px solid #cacaca;
+}
+
+.user .wrap {
+    width: 50%;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.menu {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: #e7e7e7;
+    text-align: center;
+}
+
+.menu a {
+    text-decoration:none;
+    color: #4b4b4b;
+    font-size: 20px;
+    display: inline-block;
+    padding: 15px 0;
+    border: none;
+    cursor:pointer;
+}
+
+.userData {
+    width: 85%;
+}
+
+.activeMenu {
+    background-color: #ffffff;
+}
+
+/* userData */
+/* userInfo */
+/* address */
+/* order */
+
+

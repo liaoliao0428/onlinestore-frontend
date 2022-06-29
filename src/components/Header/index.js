@@ -50,10 +50,10 @@ const Header = () => {
 
     let loginComponent
     {
-        if(loginState == 0)
-            loginComponent = <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
-        else
-            loginComponent = <Link type="button" className="userIcon" to="/login"><img src={userImage} alt="" /><p>{userName}</p></Link>
+        // if(loginState == 0)
+            // loginComponent = <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
+        // // else
+            loginComponent = <Link to="/user/userInfo" type="button" className="userIcon" ><img src={userImage} alt="" /><p>{userName}</p></Link>
     } 
 
     return (

@@ -14,7 +14,17 @@ import Footer from './components/Footer'; // 底層介紹
 // components 路由組件
 import Index from './pages/Index'; // 首頁
 import Product from './pages/Product'; // 單個商品頁面
+// Login組件
 import Login from './pages/Login'; // 登入頁面
+// import Signin from '../src/pages/Login/components/Signin'; // 登入
+// import Signup from '../src/pages/Login/components/Signup'; //註冊
+// import Froget from '../src/pages/Login/components/Froget'; // 忘記密碼
+
+// User組件
+import User from './pages/User'; // 登入頁面
+import UserInfo from '../src/pages/User/components/UserInfo'; // 登入
+import Address from '../src/pages/User/components/Address'; //註冊
+import Order from '../src/pages/User/components/Order'; // 忘記密碼
 
 import reportWebVitals from './reportWebVitals';
 
@@ -26,20 +36,29 @@ root.render(
     <BrowserRouter>
       <Header />
       <Categorys />
-      {/* 註冊路由 */}
-      <Routes >
-          {/* 無指定路由就帶到首頁 */}
-          <Route path='/' element={<Navigate to='/index' />} />
-          {/* 首頁 */}
-          <Route path='/index' element={<Index />}/>
-          {/* 單商品頁 */}
-          <Route path='/product/:productId' element={<Product />}/>
-          {/* 指定分類頁 */}
-          <Route path='/category/:categoryId' element={<Index />}/>
-          {/* 登入 */}
-          <Route path='/login/*' element={<Login />}/>
-      </Routes> 
-      {/* 註冊路由 */}
+      <div style={{height: "100vh"}}>
+        {/* 註冊路由 */}
+        <Routes >
+            {/* 無指定路由就帶到首頁 */}
+            <Route path='/' element={<Navigate to='/index' />} />
+            {/* 首頁 */}
+            <Route path='/index' element={<Index />}/>
+            {/* 單商品頁 */}
+            <Route path='/product/:productId' element={<Product />}/>
+            {/* 指定分類頁 */}
+            <Route path='/category/:categoryId' element={<Index />}/>
+            {/* 登入 */}
+            <Route path='/login/*' element={<Login />}/>
+            {/* 會員頁面 */}
+            <Route path='/user' element={<User />}>
+              {/* <Route index element={<UserInfo />}/> */}
+              <Route path='userInfo' element={<UserInfo />}/>
+              <Route path='address' element={<Address />}/>
+              <Route path='order' element={<Order />}/>
+            </Route>
+        </Routes> 
+        {/* 註冊路由 */}
+      </div>
       <Footer />
     </BrowserRouter>
   </React.StrictMode>    
