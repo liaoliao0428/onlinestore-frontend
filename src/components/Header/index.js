@@ -60,8 +60,9 @@ const Header = () => {
         // header
         <div className="header">
             <div className="wrap">
-                {/* search */}
                 <div className="search">
+                    {/* search */} 
+                    <Link to="/index">點我到首頁</Link>
                     <form action="">
                         <input className="search-bar" type="text" placeholder="輸入商品" />
                         <input className="search-submit" type="submit" value="搜尋" />
@@ -69,7 +70,9 @@ const Header = () => {
                 </div>
                 {/* userinfo */}
                 <div className="userinfo">
-                    {loginComponent}
+                    {
+                        loginComponent
+                    }
                     <a href="" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></a>
                 </div>
             </div>        

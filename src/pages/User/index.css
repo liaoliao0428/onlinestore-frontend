@@ -144,9 +144,42 @@
 }
 
 /* order */
-.order {
+/* orderState */
+.orderState {
     border-top: 1px solid #c9c9c9;
+    margin: 20px 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.orderState button {
     margin-top: 20px;
+    border: none;
+    padding: 10px 0;
+    font-size: 17px;
+    cursor:pointer;
+    background-color: #ffffff;   
+}
+
+.orderState button:hover {
+    transition: .2s;
+    background-color: #0a5b8a;
+    color: #ffffff;
+}
+
+.orderStateActive {
+    background-color: #0a5b8a !important;
+    color: #ffffff !important;
+}
+
+.orderData {
+    margin-top: 20px;
+}
+
+.orderItem {
+    margin-top: 10px;
+    border: 1px solid #e7e7e7;
 }
 
 
