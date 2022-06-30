@@ -47,6 +47,7 @@
 /* info */
 .info {
     display: flex;
+    align-items: flex-start;
     border-top: 1px solid #c9c9c9;
     margin-top: 20px;
 }
@@ -101,8 +102,10 @@
 
 /* userImage */
 .userImage {
+    margin-top: 30px;
     width: 50%;
     text-align: center;
+    border-left: 1px solid #c9c9c9;
 }
 
 .userImage img {
@@ -113,13 +116,14 @@
 .userImage label {
     display: block;
     width: 100px;
-    margin-top: 30px;
+    margin: 30px auto;
     box-sizing: border-box;
     border: 1px solid #cacaca;
     cursor:pointer;
     text-align: center;
     padding: 10px 0;
     border-radius: 3px;
+    color: #525252;
 }
 
 /* address */
