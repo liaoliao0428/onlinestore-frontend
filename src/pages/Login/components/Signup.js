@@ -138,11 +138,11 @@ const Signup = () => {
 
         // accessToken存入cookie 設定過期時間
         let inFifteenMinutes = new Date(new Date().getTime() + 24 * 3600 * 1000);//一天
-        cookies.remove("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
+        cookies.remove("accessToken")
         cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
         // 轉址
         if(cookies.get('accessToken')){
-            window.location.href = '/index'
+            window.location.href = '/user/userInfo'
         }        
     }
 

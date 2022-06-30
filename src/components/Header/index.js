@@ -24,12 +24,7 @@ const Header = () => {
     const [userName , setUserName] = useState('testUser')
     const cookies = new Cookies();
 
-    useEffect(() => {
-        let accessToken = cookies.get('accessToken')
-        if(accessToken){
-            getUserInfo(accessToken)
-        }        
-    }, []);
+    
 
     // 取得使用者基本資料
     const getUserInfo = async (accessToken) => {
@@ -47,6 +42,13 @@ const Header = () => {
             setLoginState(1)
         }
     }
+
+    useEffect(() => {
+        let accessToken = cookies.get('accessToken')
+        if(accessToken){
+            getUserInfo(accessToken)
+        }        
+    }, []);
 
     let loginComponent
     {

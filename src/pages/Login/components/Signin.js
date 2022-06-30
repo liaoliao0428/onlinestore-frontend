@@ -33,10 +33,14 @@ const Signin = () => {
         // 回傳signin狀態如果是true 代表登入成功 false代表失敗
         if(response.data.signin){
             // accessToken存入cookie 設定過期時間
+            cookies.remove("accessToken")
             let inFifteenMinutes = new Date(new Date().getTime() + 24 * 3600 * 1000);//一天
             cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
             // 轉址
-            window.location.href = '/index'
+            if(cookies.get('accessToken')){
+                window.location.href = '/user/userInfo'
+            }
+            
         }else{
             alert(response.data.message)
             return false
