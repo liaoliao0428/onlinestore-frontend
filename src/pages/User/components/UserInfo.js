@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 
 const UserInfo = () => {
+    console.log('個人資訊');
+
     return (
         <Fragment>
             <h2>我的檔案</h2>
