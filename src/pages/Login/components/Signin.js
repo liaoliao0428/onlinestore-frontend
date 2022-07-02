@@ -7,12 +7,11 @@ import { useState , useEffect } from 'react'
 // URL
 import { URL } from '../../../global/url'
 // cookies
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie'
 
 const Signin = () => {
     const [mail , setMail] = useState('')
     const [password , setPassword] = useState('')
-    const cookies = new Cookies();
 
     const changeMail = (e) => {
         setMail(e.target.value)
@@ -33,12 +32,12 @@ const Signin = () => {
         // 回傳signin狀態如果是true 代表登入成功 false代表失敗
         if(response.data.signin){
             // accessToken存入cookie 設定過期時間
-            cookies.remove("accessToken")
+            Cookies.remove("accessToken")
             let inFifteenMinutes = new Date(new Date().getTime() + 24 * 3600 * 1000);//一天
-            cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
+            Cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
             // 轉址
-            if(cookies.get('accessToken')){
-                window.location.href = '/user/userInfo'
+            if(Cookies.get('accessToken')){
+                window.location.href = '/user/profile'
             }
             
         }else{

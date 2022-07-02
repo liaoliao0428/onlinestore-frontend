@@ -6,7 +6,7 @@ import { useState , useEffect } from 'react'
 import { Link , Routes , Route , useLocation } from 'react-router-dom'
 
 // 組件
-import UserInfo from './components/UserInfo'
+import Profile from './components/Profile'
 import Address from './components/Address'
 import Order from './components/Order'
 
@@ -23,13 +23,13 @@ const User = () => {
         <div className="user">
             <div className="wrap">
                 <div className='menu'>
-                    <Link to='/user/userInfo' className={userData === "userInfo" ? 'activeMenu' : ''} >個人資訊</Link>
+                    <Link to='/user/profile' className={userData === "profile" ? 'activeMenu' : ''} >個人資訊</Link>
                     <Link to='/user/address' className={userData === "address" ? 'activeMenu' : ''}>寄貨地址</Link>
                     <Link to='/user/order' className={userData === "order" ? 'activeMenu' : ''}>訂單管理</Link>
                 </div>
                 <div className='userData'>                    
                     <Routes>
-                        <Route path='/userInfo' element={<UserInfo/>}/>
+                        <Route path='/profile' element={<Profile/>}/>
                         <Route path='/address' element={<Address />}/>
                         <Route path='/order' element={<Order />}/>
                     </Routes>
