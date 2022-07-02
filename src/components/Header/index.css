@@ -13,6 +13,13 @@
     align-items: center;
 }
 
+.header .search a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #000;  
+    font-size: 18px;  
+}
+
 .header .search-bar {
     opacity: .5;
     font-size: 16px;
@@ -61,4 +68,24 @@
 .header .userinfo .shopping-cart{
     color: #000;
     font-size: 20px;
+}
+
+.userIcon {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 2px 0;
+    margin-right: 30px;
+    color: black;
+    letter-spacing: 2px;
+}
+
+.userIcon img{
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.userIcon p{
+    font-size: 16px;
+    display: inline-block;
 }

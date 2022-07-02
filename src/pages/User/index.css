@@ -1,0 +1,185 @@
+/* User */
+.user {
+    margin: 20px 0 0 0;
+    padding-top: 30px;
+    border-top: 1px solid #cacaca;
+}
+
+.user .wrap {
+    width: 50%;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.menu {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: #e7e7e7;
+    text-align: center;
+}
+
+.menu a {
+    text-decoration:none;
+    color: #4b4b4b;
+    font-size: 20px;
+    display: inline-block;
+    padding: 15px 0;
+    border: none;
+    cursor:pointer;
+}
+
+.userData {
+    width: 85%;
+}
+
+.activeMenu {
+    background-color: #ffffff;
+}
+
+/* userData */
+.userData {
+    padding: 30px 30px;
+}
+
+/* info */
+.info {
+    display: flex;
+    align-items: flex-start;
+    border-top: 1px solid #c9c9c9;
+    margin-top: 20px;
+}
+
+/* userInfo */
+.userInfo {
+    width: 50%;
+}
+
+.userInfo p {
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.userInfo input {
+    display: block;
+    margin-bottom: 20px;
+    width: 300px;
+    padding: 10px 5px;
+    font-size: 15px;
+    color: #656565;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+}
+
+.userInfo select{
+    margin-bottom: 20px;
+    width: 150px;
+    font-size: 15px;
+    color: #656565;
+    padding: 10px 5px;
+    border: 1px solid #cacaca;
+}
+
+.userInfo select:hover {
+    border: 1px solid #0c6090;
+}
+
+.userInfo button {
+    display: block;
+    margin-top: 30px;
+    width: 80px;
+    padding: 10px 5px;
+    font-size: 15px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    background-color: #e56051;
+    border: none;
+    border-radius: 3px;
+    cursor:pointer;
+}
+
+/* userImage */
+.userImage {
+    margin-top: 30px;
+    width: 50%;
+    text-align: center;
+    border-left: 1px solid #c9c9c9;
+}
+
+.userImage img {
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.userImage label {
+    display: block;
+    width: 100px;
+    margin: 30px auto;
+    box-sizing: border-box;
+    border: 1px solid #cacaca;
+    cursor:pointer;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 3px;
+    color: #525252;
+}
+
+/* address */
+.address {
+    border-top: 1px solid #c9c9c9;
+    margin-top: 20px;
+}
+
+.addressItem {
+    border-bottom: 1px solid #c9c9c9;
+    padding: 10px 0 10px 50px;
+}
+
+.addressItem p {
+    color: #2e2e2e;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+/* order */
+/* orderState */
+.orderState {
+    border-top: 1px solid #c9c9c9;
+    margin: 20px 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.orderState button {
+    margin-top: 20px;
+    border: none;
+    padding: 10px 0;
+    font-size: 17px;
+    cursor:pointer;
+    background-color: #ffffff;   
+}
+
+.orderState button:hover {
+    transition: .2s;
+    background-color: #0a5b8a;
+    color: #ffffff;
+}
+
+.orderStateActive {
+    background-color: #0a5b8a !important;
+    color: #ffffff !important;
+}
+
+.orderData {
+    margin-top: 20px;
+}
+
+.orderItem {
+    margin-top: 10px;
+    border: 1px solid #e7e7e7;
+}
+
+
