@@ -142,7 +142,7 @@ const Signup = () => {
         cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
         // 轉址
         if(cookies.get('accessToken')){
-            window.location.href = '/user/userInfo'
+            window.location.href = '/user/profile'
         }        
     }
 

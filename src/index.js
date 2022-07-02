@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 // 路由套件
-import { BrowserRouter , Routes , Route , Navigate } from 'react-router-dom'
+import { BrowserRouter as Router , Routes , Route , Navigate } from 'react-router-dom'
 
 // css
 import './index.css';
+
+// PrivateRoutes
+import PrivateRoutes from './urils/PrivateRoutes';
 
 // components 一般組件
 import Header from './components/Header'; // 頭(搜尋bar、使用者登入/資訊)
@@ -16,15 +19,9 @@ import Index from './pages/Index'; // 首頁
 import Product from './pages/Product'; // 單個商品頁面
 // Login組件
 import Login from './pages/Login'; // 登入頁面
-// import Signin from '../src/pages/Login/components/Signin'; // 登入
-// import Signup from '../src/pages/Login/components/Signup'; //註冊
-// import Froget from '../src/pages/Login/components/Froget'; // 忘記密碼
 
 // User組件
 import User from './pages/User'; // 登入頁面
-import UserInfo from '../src/pages/User/components/UserInfo'; // 登入
-import Address from '../src/pages/User/components/Address'; //註冊
-import Order from '../src/pages/User/components/Order'; // 忘記密碼
 
 import reportWebVitals from './reportWebVitals';
 
@@ -33,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // 畫面渲染
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <Header />
       <Categorys />
       {/* <div style={{height: "100vh"}}> */}
@@ -41,21 +38,25 @@ root.render(
         <Routes >
             {/* 無指定路由就帶到首頁 */}
             <Route path='/' element={<Navigate to='/index' />} />
+            {/* 登入 */}
+            <Route path='/login/*' element={<Login />}/>
             {/* 首頁 */}
             <Route path='/index' element={<Index />}/>
             {/* 單商品頁 */}
             <Route path='/product/:productId' element={<Product />}/>
             {/* 指定分類頁 */}
             <Route path='/category/:categoryId' element={<Index />}/>
-            {/* 登入 */}
-            <Route path='/login/*' element={<Login />}/>
-            {/* 會員頁面 */}
-            <Route path='/user/*' element={<User />} />
+
+            {/* route導航 確認都有權限才可以進到這個頁面 */}
+            <Route element={ <PrivateRoutes /> }>
+              {/* 會員頁面 */}
+              <Route path='/user/*' element={<User />} />
+            </Route>      
         </Routes> 
         {/* 註冊路由 */}
       {/* </div> */}
       <Footer />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>    
 );
 

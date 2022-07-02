@@ -6,38 +6,15 @@ import axios from 'axios'
 // hook
 import { useState , useEffect } from 'react'
 // cookies
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie'
 
-const UserInfo = () => {
+const Profile = () => {
     const [userName , setUserName] = useState('')
     const [mail , setMail] = useState('')
     const [phone , setPhone] = useState('')
-    const [gender , setGender] = useState('')
+    const [gender , setGender] = useState(3)
     const [birthDay , setBirthDay] = useState('')
-    const [userImage , setuserImage] = useState('')
-    const cookies = new Cookies();
-
-
-    const getUserData = async (accessToken) => {
-        let url = `${URL}/user/getUserData`
-        let response = await axios.post(url , {
-            accessToken: accessToken
-        })
-
-        setUserName(response.data.userData.userName)
-        setMail(response.data.userData.mail)
-        setPhone(response.data.userData.phone)
-        setGender(response.data.userData.gender)
-        setBirthDay(response.data.userData.birthDay)
-        setuserImage(response.data.userData.userImage)
-    }
-
-    useEffect(() => {
-        let accessToken = cookies.get('accessToken')
-        if(accessToken){
-            getUserData(accessToken)
-        } 
-    }, []);
+    const [userImage , setuserImage] = useState('http://fakeimg.pl/120x120')
 
     const changeUserName = (e) => {
         setUserName(e.target.value)
@@ -63,6 +40,62 @@ const UserInfo = () => {
         setuserImage(e.target.value)
     }
 
+    // 取得使用者資料
+    const getUserData = async (accessToken) => {
+        let url = `${URL}/user/getUserData`
+        const { data } = await axios.post(url , {
+            'accessToken': accessToken
+        })
+        
+        if(data.userData){
+            const { userName , mail , phone , gender , birthDay , userImage } = data.userData
+            setUserName(userName)
+            setMail(mail)
+            setGender(gender)
+
+            if(phone){
+                setPhone(phone)
+            }            
+
+            if(birthDay){
+                setBirthDay(birthDay)
+            }
+
+            if(userImage){
+                setuserImage(userImage)
+            }
+        }    
+    }
+
+    useEffect(() => {
+        const accessToken = Cookies.get('accessToken')
+        if(accessToken){
+            getUserData(accessToken)
+        } 
+    }, []);
+    
+    // 更新使用者資料
+    const updateUserProfile = async () => {
+        const accessToken = Cookies.get('accessToken')
+        let url = `${URL}/user/updateUserData`
+        let userData = {
+            'userName':  userName,
+            'mail': mail,
+            'phone': phone,
+            'gender': gender,
+            'birthDay': birthDay
+        }
+
+        const { data } = await axios.patch(url , {
+            accessToken: accessToken,
+            userData: userData
+        })
+
+        if(data){
+            alert('資料更新成功')
+        }
+    }   
+
     return (
         <Fragment>
             <h2>我的檔案</h2>
@@ -82,7 +115,7 @@ const UserInfo = () => {
                     </div>
                     <div className="gender">
                         <p>性別 : </p>
-                        <select>
+                        <select value={gender} onChange={(e) => {changeGender(e)}}>
                             <option value="1" >男</option>
                             <option value="2" >女</option>
                             <option value="3" >其他</option>
@@ -90,12 +123,12 @@ const UserInfo = () => {
                     </div>
                     <div className="birthDay">
                         <p>生日 : </p>
-                        <input type="date" />
+                        <input type="date" value={birthDay} onChange={(e) => {changeBirthDay(e)}}/>
                     </div>
-                    <button>儲存</button>
+                    <button onClick={updateUserProfile}>儲存</button>
                 </div>
                 <div className='userImage'>
-                    <img src="http://fakeimg.pl/120x120" alt="使用者相片" />
+                    <img src={userImage} alt="使用者相片" />
                     <label type='button'><input type="file" hidden/>選擇照片</label>
                 </div>
             </div>
@@ -103,4 +136,4 @@ const UserInfo = () => {
     );
 }
 
-export default UserInfo;
+export default Profile;
