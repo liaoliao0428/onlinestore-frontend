@@ -1,5 +1,5 @@
 // uuid套件
-import { v4 } from 'uuid'
+// import { v4 } from 'uuid'
 // hook
 import { useState , useEffect } from 'react'
 
@@ -8,32 +8,25 @@ const ProductImage = (props) => {
     const [ mainImage , setMainImage ] = useState([])
 
 
-    const changeMainImage = async (image) => {
+    const changeMainImage = (image) => {
         setMainImage(image)
     }
 
     useEffect(() => {
-
         if(images[0]){
             changeMainImage(images[0].image)
-
-        }    
-
-        //  images[0] ? changeMainImage(images[0].image) : null
-
-
-
+        }
     }, [ images ]);    
 
     return (
         // productImage
         <div className="productImage">
             <div className="mainImage">
-                <img src={mainImage} alt="" />
+                <img src={mainImage} alt="大圖" />
             </div>
             <div className="smallImage">
                 {
-                    images.map(item => <div><button key={ v4() } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button></div>)
+                    images.map(item => <div><button key={ item.id } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button></div>)
                 }
             </div>
         </div>
