@@ -23,6 +23,12 @@ import Login from './pages/Login'; // 登入頁面
 // User組件
 import User from './pages/User'; // 登入頁面
 
+// Cart組件
+import Cart from './pages/Cart'; // 購物車組件
+
+// Checkout組件
+import Checkout from './pages/Checkout';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -51,6 +57,10 @@ root.render(
             <Route element={ <PrivateRoutes /> }>
               {/* 會員頁面 */}
               <Route path='/user/*' element={<User />} />
+              {/* 購物車 */}
+              <Route path='/cart/*' element={<Cart />} />
+              {/* 結帳畫面 */}
+              <Route path='/checkout' element={<Checkout />} />
             </Route>      
         </Routes> 
         {/* 註冊路由 */}
