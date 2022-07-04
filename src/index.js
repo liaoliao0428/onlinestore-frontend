@@ -34,8 +34,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // 畫面渲染
+// React.StrictMode
 root.render(
-  <React.StrictMode>
+  <>
     <Router>
       <Header />
       <Categorys />
@@ -58,16 +59,16 @@ root.render(
               {/* 會員頁面 */}
               <Route path='/user/*' element={<User />} />
               {/* 購物車 */}
-              <Route path='/cart/*' element={<Cart />} />
+              <Route path='/cart' element={<Cart />} />
               {/* 結帳畫面 */}
-              <Route path='/checkout' element={<Checkout />} />
+              <Route path='/checkout/*' element={<Checkout />} />
             </Route>      
         </Routes> 
         {/* 註冊路由 */}
       {/* </div> */}
       <Footer />
     </Router>
-  </React.StrictMode>    
+  </>    
 );
 
 // If you want to start measuring performance in your app, pass a function

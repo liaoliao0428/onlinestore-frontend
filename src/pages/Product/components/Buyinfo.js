@@ -54,10 +54,19 @@ const Buyinfo = ( props ) => {
             return false
         }
 
-        const { data } = await axios.post(url,{
-            'accessToken': accessToken,
+        // const { data } = await axios.post(url,{
+        //     'accessToken': accessToken,
+        //     'productDetailId': selectProductDetailId,
+        //     'quantity': buyQuantity
+        // })
+
+        const { data } = await axios.post(url , {
             'productDetailId': selectProductDetailId,
             'quantity': buyQuantity
+        } ,{
+            headers: {
+                'Authentication': accessToken
+            }
         })
 
         if (data) {
