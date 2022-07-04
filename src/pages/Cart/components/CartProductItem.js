@@ -17,15 +17,19 @@ const CartProductItem = (props) => {
     const deleteCartProduct = async () => {
         const accessToken = Cookies.get('accessToken')
         let url = `${URL}/cart/delete`
-        const { data } = await axios.delete(url,{
-            data: {
-                accessToken: accessToken,
-                productDetailId: productDetailId
+
+        const { data } = await axios.post(url , {
+            'productDetailId': productDetailId
+        } , {
+            headers: {
+                'Authentication': accessToken
             }
         })
 
+        console.log(data);
+
         // 把購物車陣列裡的商品刪除 讓畫面可以重新render
-        if(data){
+        if( data ){
             setCartProduct((prev) => {
                 return prev.filter(item => item.productDetailId !== productDetailId)
             })

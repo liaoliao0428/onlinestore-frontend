@@ -24,8 +24,11 @@ const Header = () => {
     // 取得使用者基本資料
     const getUserInfo = async (accessToken) => {
         let url = `${URL}/user/getUserBasicData`
-        const { data } = await axios.post(url, {
-            accessToken: accessToken
+
+        const { data } = await axios.post(url , {} ,{
+            headers: {
+                'Authentication': accessToken
+            }
         })
 
         if(data.userBasicData){

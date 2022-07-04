@@ -11,7 +11,7 @@ import { v4 } from 'uuid';
 // base64
 import base64 from 'base-64';
 // route
-import { Link } from 'react-router-dom'
+import { Link , Route , Navigate} from 'react-router-dom'
 
 // css
 import './index.css'
@@ -24,25 +24,26 @@ const Cart = () => {
     const [totalPrice , setTotalPrice] = useState(0)
     const [selectCartProduct , setSelectCartProduct] = useState([])
     const [selectCartProductBase64 , setSelectCartProductBase64] = useState([])
-    // const allProductCheckRef = useRef(false)
-
-    // 取得購物車商品
-    const getCartProduct = async () => {
-        const accessToken = Cookies.get('accessToken')
-        let url = `${URL}/cart`
-        const { data } = await axios.post(url , {
-            'accessToken': accessToken
-        })
-
-        if(data.cart){
-            setCartProduct(data.cart)
-        }
-    }
 
     // 進來當前頁觸發取得購物車商品
     useEffect(() => {
         getCartProduct()
     }, []);
+
+    // 取得購物車商品
+    const getCartProduct = async () => {
+        const accessToken = Cookies.get('accessToken')
+        let url = `${URL}/cart`
+        const { data } = await axios.post(url , {} ,{
+            headers: {
+                'Authentication': accessToken
+            }
+        })
+
+        if(data.cart){
+            setCartProduct(data.cart)
+        }
+    }    
 
     // 有東西被選中後更新商品的陣列base64編碼
     useEffect(() => {
@@ -55,8 +56,7 @@ const Cart = () => {
             alert('尚未選擇結帳商品')
             return null
         }else{
-            // <Link to={`/Checkout/?state=${selectCartProductBase64}`} />
-            window.location.href = `/Checkout/?state=${selectCartProductBase64}`
+            window.location.href = `/checkout/?state=${selectCartProductBase64}`
         }
     }
 
@@ -119,7 +119,6 @@ const Cart = () => {
                         <p>全選</p> */}
                     </div>
                     <p>總金額({selectCartProduct.length}個商品) : ${totalPrice}</p>
-                    <Link to={`/Checkout/?state=${selectCartProductBase64}`} onClick={selectCartProductCheck}>結帳</Link>
                     <button onClick={selectCartProductCheck}>結帳</button>
                 </div>
             </div>
