@@ -16,16 +16,18 @@ const PrivateRoutes = () => {
 
     // 檢查是否有權限
     const authCheck = async () => {
+
         let accessToken = Cookies.get('accessToken')
         let url = `${URL}/user/reactRouteAuthCheck`
-
         const { data } = await axios.post(url , {} ,{
             headers: {
                 'Authentication': accessToken
             }
         })
 
-        setAuth(data.authCheck);
+        if(!data.authCheck){
+            setAuth(data.authCheck);
+        }
     } 
 
     useEffect(() => {
