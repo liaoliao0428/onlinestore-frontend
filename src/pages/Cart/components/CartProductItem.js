@@ -18,15 +18,14 @@ const CartProductItem = (props) => {
         const accessToken = Cookies.get('accessToken')
         let url = `${URL}/cart/delete`
 
-        const { data } = await axios.post(url , {
-            'productDetailId': productDetailId
-        } , {
+        const { data } = await axios.delete(url , {
             headers: {
                 'Authentication': accessToken
+            },
+            data: {
+                'productDetailId': productDetailId
             }
         })
-
-        console.log(data);
 
         // 把購物車陣列裡的商品刪除 讓畫面可以重新render
         if( data ){

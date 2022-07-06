@@ -8,6 +8,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 // hook
 import { useState , useEffect } from 'react';
+// v4
+import { v4 } from 'uuid';
 
 // URL
 import { URL } from '../../global/url';
@@ -20,13 +22,14 @@ import CheckoutItem from './components/CheckoutItem';
 
 const Checkout = () => {
     const [ checkoutProducts , setCheckoutProducts] = useState([])
-    const [ productTotalPrice , setProductTotalPrice] = useState('')
-    const [ totalPrice , setTotalPrice ] = useState('0')
+    const [ productTotalPrice , setProductTotalPrice] = useState(0)
+    const [ totalPrice , setTotalPrice ] = useState(60)
 
-    const [searchParams]  = useSearchParams()
+    const [ searchParams ]  = useSearchParams()
     const productState = searchParams.get('state')
     const checkoutPorudctDetailIds = JSON.parse(base64.decode(productState)) 
     
+    // 取要結帳的商品資料
     useEffect(() => {
         getCheckoutProduct()
     }, [] )
@@ -44,20 +47,29 @@ const Checkout = () => {
 
         if(data){
             setCheckoutProducts(data.checkoutProducts)
-            // caculateTotalPrice()
         }
-    }    
+    }
+    
+    // 取回商品陣列變動 更改商品總價
+    useEffect(() => {
+        checkoutProducts.map((item) => {
+            // 把總價加上去
+            setProductTotalPrice((prev) => {
+                return [
+                    Math.floor(prev) + Math.floor(item.quantity*item.unitPrice)
+                ]
+            })
+        })
+    }, [checkoutProducts])
 
-    // const caculateTotalPrice = () => {
-    //     checkoutProducts.map((item) => {
-    //         // 把總價加上去
-    //         setTotalPrice((prev) => {
-    //             return [
-    //                 Math.floor(prev) + Math.floor(item.quantity*item.unitPrice)
-    //             ]
-    //         })
-    //     })
-    // }
+    // 商品總價變動 更改全部總價
+    useEffect(() => {
+        setTotalPrice((prev) => {
+            return [
+                Math.floor(prev) + Math.floor(productTotalPrice)
+            ]
+        })
+    }, [productTotalPrice])
 
     return (
         <div className="checkout">
@@ -72,14 +84,14 @@ const Checkout = () => {
                 {/* checkoutProduct */}
                 <div className='checkoutProduct'>
                     {
-                        checkoutProducts.map(item => <CheckoutItem />)
+                        checkoutProducts.map(item => <CheckoutItem key={ v4() } productDetail={item}/>)
                     }
                 </div>
                 {/* checkout */}
                 <div className='amount'>
-                    <p>商品總金額 : ${totalPrice}</p>
+                    <p>商品總金額 : ${productTotalPrice}</p>
                     <p>運費總金額 : $60</p>
-                    <p>總付款金額 : ${totalPrice + 60}</p>
+                    <p>總付款金額 : ${totalPrice}</p>
                     <hr/>
                     <div className="checkoutCheck">
                         <button>下訂單</button>
