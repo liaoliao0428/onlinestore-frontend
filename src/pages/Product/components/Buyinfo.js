@@ -54,12 +54,6 @@ const Buyinfo = ( props ) => {
             return false
         }
 
-        // const { data } = await axios.post(url,{
-        //     'accessToken': accessToken,
-        //     'productDetailId': selectProductDetailId,
-        //     'quantity': buyQuantity
-        // })
-
         const { data } = await axios.post(url , {
             'productDetailId': selectProductDetailId,
             'quantity': buyQuantity
@@ -69,11 +63,11 @@ const Buyinfo = ( props ) => {
             }
         })
 
-        if (data) {
+        if ( data[0] ) {
             alert('商品已加入購物車')
             return false
         }else{
-            alert('錯誤')
+            window.location.href = "/login"
             return false
         }
     }
