@@ -19,26 +19,28 @@ import './index.css';
 const Header = () => {
     const [loginState , setLoginState] = useState(0)
     const [userImage , setUserImage] = useState('http://fakeimg.pl/30x30')
-    const [userName , setUserName] = useState('testUser')
+    const [userName , setUserName] = useState()
 
     // 取得使用者基本資料
     const getUserInfo = async (accessToken) => {
         let url = `${URL}/user/getUserBasicData`
-        let response = await axios.post(url, {
-            accessToken: accessToken
+
+        const { data } = await axios.post(url , {} ,{
+            headers: {
+                'Authentication': accessToken
+            }
         })
 
-        if(response.data.userBasicData){
-            const { userImage , userName } = response.data.userBasicData
+        if(data.userBasicData){
+            const { userImage , userName } = data.userBasicData
+
             if(userImage){
                 setUserImage(userImage)
             }
+
             setUserName(userName)
-        }        
-        
-        if(userImage && userName){
             setLoginState(1)
-        }
+        } 
     }
 
     useEffect(() => {
@@ -73,7 +75,7 @@ const Header = () => {
                     {
                         loginComponent
                     }
-                    <a href="" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></a>
+                    <Link to="/cart" className="shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></Link>
                 </div>
             </div>        
         </div>

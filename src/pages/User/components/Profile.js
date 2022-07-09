@@ -43,8 +43,10 @@ const Profile = () => {
     // 取得使用者資料
     const getUserData = async (accessToken) => {
         let url = `${URL}/user/getUserData`
-        const { data } = await axios.post(url , {
-            'accessToken': accessToken
+        const { data } = await axios.post(url , {} ,{
+            headers: {
+                'Authentication': accessToken
+            }
         })
         
         if(data.userData){
@@ -87,8 +89,11 @@ const Profile = () => {
         }
 
         const { data } = await axios.patch(url , {
-            accessToken: accessToken,
-            userData: userData
+            'userData': userData
+        } ,{
+            headers: {
+                'Authentication': accessToken
+            }
         })
 
         if(data){
