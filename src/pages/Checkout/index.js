@@ -91,7 +91,8 @@ const Checkout = () => {
             'checkoutProducts': checkoutProducts,
             'productTotalPrice': productTotalPrice,
             'totalPrice': totalPrice,
-            'payMedhod': payMedhod
+            'payMedhod': payMedhod,
+            'checkoutType': 1    // checkoutType == 1 代表要先建立訂單才能結帳
         } , {
             headers: {
                 'Authentication': accessToken
