@@ -1,5 +1,5 @@
 // 路由組件
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 // axios套件
 import axios from 'axios'
 // hook
@@ -10,6 +10,7 @@ import { URL } from '../../../global/url'
 import Cookies from 'js-cookie'
 
 const Signin = () => {
+    const history = useNavigate();
     const [mail , setMail] = useState('')
     const [password , setPassword] = useState('')
 
@@ -37,9 +38,8 @@ const Signin = () => {
             Cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
             // 轉址
             if(Cookies.get('accessToken')){
-                window.location.href = '/user/profile'
-            }
-            
+                history('/user/profile')
+            }            
         }else{
             alert(response.data.message)
             return false

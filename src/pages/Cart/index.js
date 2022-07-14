@@ -11,7 +11,7 @@ import { v4 } from 'uuid';
 // base64
 import base64 from 'base-64';
 // route
-import { Link , Route , Navigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // css
 import './index.css'
@@ -20,6 +20,7 @@ import './index.css'
 import CartProductItem from './components/CartProductItem'
 
 const Cart = () => {
+    const history = useNavigate();
     const [cartProduct , setCartProduct] = useState('')
     const [totalPrice , setTotalPrice] = useState(0)
     const [selectCartProduct , setSelectCartProduct] = useState([])
@@ -56,7 +57,7 @@ const Cart = () => {
             alert('尚未選擇結帳商品')
             return null
         }else{
-            window.location.href = `/checkout/?state=${selectCartProductBase64}`
+            history(`/checkout/?state=${selectCartProductBase64}`)
         }
     }
 

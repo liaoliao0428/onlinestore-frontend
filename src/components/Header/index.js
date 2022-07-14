@@ -1,5 +1,5 @@
 // 路由組件
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
@@ -17,6 +17,7 @@ import './index.css';
 
 
 const Header = () => {
+    const history = useNavigate();
     const [loginState , setLoginState] = useState(0)
     const [userImage , setUserImage] = useState('http://fakeimg.pl/30x30')
     const [userName , setUserName] = useState()
@@ -48,7 +49,8 @@ const Header = () => {
         if(accessToken){
             getUserInfo(accessToken)
         }        
-    }, []);
+    }, [ history ]);
+
 
     let loginComponent
     {
