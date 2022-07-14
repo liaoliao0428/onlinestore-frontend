@@ -131,7 +131,21 @@ const Checkout = () => {
                         checkoutProducts.map(item => <CheckoutItem key={ v4() } productDetail={item}/>)
                     }
                 </div>
-                {/* checkout */}
+                {/* userReceiveAddress */}
+                <div className='userReceiveAddress'>
+                    <div className='receiveInfo'>
+                        <p>寄送資訊</p>
+                        <button className='changeReceiveAddress'>變更</button>
+                    </div>                    
+                    <hr/>
+                    <div className='receiveAddress'>
+                        <p>全名 : sdfsdf</p>
+                        <p>手機 : 0934329737</p>
+                        <p>超商 : 全家 台醫店</p>
+                        <p>地址 : xx路xx段xx號</p>
+                    </div>
+                </div>
+                {/* amount */}
                 <div className='amount'>
                     <div className='payMedhod'>
                         <p>付款方式 : </p>
@@ -147,7 +161,6 @@ const Checkout = () => {
                         <button onClick={checkout}>下訂單</button>
                     </div>
                     <div id="orderForm"> </div>
-
                 </div>
             </div>
         </div>

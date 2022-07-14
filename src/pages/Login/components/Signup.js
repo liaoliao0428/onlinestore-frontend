@@ -1,5 +1,5 @@
 // 路由套件
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 // axios套件
 import axios from 'axios'
 // hook
@@ -10,6 +10,7 @@ import { URL } from '../../../global/url'
 import Cookies from 'universal-cookie';
 
 const Signup = () => {
+    const history = useNavigate();
 
     // var buttonColor = {
     //     backgroundColor: '#cacaca'
@@ -142,7 +143,7 @@ const Signup = () => {
         cookies.set("accessToken",response.data.accessToken,{expires: inFifteenMinutes})
         // 轉址
         if(cookies.get('accessToken')){
-            window.location.href = '/user/profile'
+            history('/user/profile')
         }        
     }
 

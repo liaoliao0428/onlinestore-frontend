@@ -50,7 +50,46 @@
     font-size: 20px;
 }
 
-/* checkoutCheck */
+/* userReceiveAddress */
+.userReceiveAddress {
+    margin-top: 10px;
+    border: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    padding: 15px 40px 15px 40px;
+    color: #5b5b5b;
+    font-size: 18px;
+}
+
+.receiveInfo {
+    display: flex;
+    align-items: center;
+}
+
+.changeReceiveAddress {
+    margin-left: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor:pointer;
+    color: #565656;
+}
+
+.changeReceiveAddress:hover {
+    background-color: #ebebeb;
+}
+
+.receiveAddress {
+    width: 15%;
+    font-size: 18px;
+    color: #5b5b5b;
+}
+
+.receiveAddress p {
+    margin: 10px 0; 
+}
+
+/* amount */
 .amount {
     margin-top: 30px;
     border: 1px solid #e7e7e7;

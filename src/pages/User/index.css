@@ -132,6 +132,10 @@
     margin-top: 20px;
 }
 
+.address p {
+    margin-top: 30px;
+}
+
 .addressItem {
     border-bottom: 1px solid #c9c9c9;
     padding: 10px 0 10px 50px;
@@ -141,6 +145,75 @@
     color: #2e2e2e;
     margin: 10px 0;
     letter-spacing: 1px;
+}
+
+.receiverName {
+    display: flex;
+    align-items: center;
+}
+
+.receiverName p {
+    margin: 0px;
+    padding: 3px 0;
+}
+
+.addressItem .defaultAddress {
+    background-color: #00bfa5;
+    color: #ffffff;
+    margin-left: 10px;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight:bold
+}
+
+.addressAction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.setDefaultAddress {
+    background-color: #ffffff;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor:pointer;
+    color: #565656;
+}
+
+.setDefaultAddress:hover {
+    background-color: #ebebeb;
+}
+
+.deleteAddress{
+    border: none;
+    cursor:pointer;
+    background-color: #ffffff;
+    font-size: 15px;
+}
+
+.deleteAddress:hover {
+    color: #ea0000;
+}
+
+.addReceiveAddress {
+    display: flex;
+}
+
+.addReceiveAddress button {
+    margin-left: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    padding: 0px 10px;
+    cursor:pointer;
+    color: #565656;
+}
+
+.addReceiveAddress button:hover {
+    border: 1px solid #0c6090;
 }
 
 /* order */
