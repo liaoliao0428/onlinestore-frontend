@@ -19,14 +19,24 @@ import './index.css'
 
 // CheckoutItem
 import CheckoutItem from './components/CheckoutItem';
+// changeAddressModal
+import ChangeAddressModal from "./components/ChangeAddressModal";
 
 const Checkout = () => {
-    const [ checkoutProducts , setCheckoutProducts] = useState([])
-    const [ productTotalPrice , setProductTotalPrice] = useState(0)
+    const [ checkoutProducts , setCheckoutProducts ] = useState([])
+    const [ productTotalPrice , setProductTotalPrice ] = useState(0)
     const [ totalPrice , setTotalPrice ] = useState(60)
-    const [ payMedhod , setPayMedhod] = useState(1)
-    const [ ecpayChecked , setEcpayChecked] = useState(true)
-    const [ lineayChecked , setLinepayChecked] = useState(false)
+    const [ payMedhod , setPayMedhod ] = useState(1)
+    const [ ecpayChecked , setEcpayChecked ] = useState(true)
+    const [ lineayChecked , setLinepayChecked ] = useState(false)
+    const [ receiveAddressId , setReceiveAddressId ] = useState('')
+    const [ receiverName , setReceiverName ] = useState('')
+    const [ receiverCellPhone , setReceiverCellPhone ] = useState('')
+    const [ receiverStoreType , setReceiverStoreType ] = useState('')
+    const [ receiverStoreName , setReceiverStoreName ] = useState('')
+    const [ receiverAddress , setReceiverAddress ] = useState('')
+    const [ changeAddressModalOpen , setChangeAddressModalOpen ] = useState(false);
+    const [ selectedAddressId , setSelectedAddressId ] = useState('');
 
     // 取網址傳的search參數
     const [ searchParams ]  = useSearchParams()
@@ -36,24 +46,14 @@ const Checkout = () => {
     // 取要結帳的商品資料
     useEffect(() => {
         getCheckoutProduct()
-    }, [] )
+        getReceiverDefaultAddress()
+    }, [])
 
-    const getCheckoutProduct = async () => {
-        const accessToken = Cookies.get('accessToken')
-        const url = `${URL}/checkout/product`
-        const { data } = await axios.post(url, {
-            'checkoutPorudctDetailIds': checkoutPorudctDetailIds
-        } , {
-            headers: {
-                'Authentication': accessToken
-            }
-        })
+    // 如果改變寄送資訊重新撈一次寄送資訊的部分
+    useEffect(() => {
+        getReceiverDefaultAddress()
+    }, [ selectedAddressId ]);
 
-        if(data){
-            setCheckoutProducts(data.checkoutProducts)
-        }
-    }
-    
     // 取回商品陣列變動 更改商品總價
     useEffect(() => {
         checkoutProducts.forEach((item) => {
@@ -72,6 +72,46 @@ const Checkout = () => {
             
         })
     }, [productTotalPrice])
+
+    // 取要結帳的商品資料
+    const getCheckoutProduct = async () => {
+        const accessToken = Cookies.get('accessToken')
+        const url = `${URL}/checkout/product`
+        const { data } = await axios.post(url, {
+            'checkoutPorudctDetailIds': checkoutPorudctDetailIds
+        } , {
+            headers: {
+                'Authentication': accessToken
+            }
+        })
+
+        if(data){
+            setCheckoutProducts(data.checkoutProducts)
+        }
+    }
+    
+    // 取得寄送資訊
+    const getReceiverDefaultAddress = async () => {
+        const accessToken = Cookies.get('accessToken')
+        const url = `${URL}/checkout/getReceiverDefaultAddress`
+        const { data } = await axios.post(url, {
+
+        } , {
+            headers: {
+                'Authentication': accessToken
+            }
+        })
+
+        if ( data.receiverDefaultAddress ) {
+            const { receiveAddressId , receiverName , receiverCellPhone , receiverStoreType , receiverStoreName , receiverAddress } = data.receiverDefaultAddress
+            setReceiveAddressId(receiveAddressId)
+            setReceiverName(receiverName)
+            setReceiverCellPhone(receiverCellPhone)
+            setReceiverStoreType(receiverStoreType)
+            setReceiverStoreName(receiverStoreName)
+            setReceiverAddress(receiverAddress)
+        }
+    }
 
     // 改變付款方式
     const changePayMethod = (e) => {
@@ -92,14 +132,13 @@ const Checkout = () => {
             'productTotalPrice': productTotalPrice,
             'totalPrice': totalPrice,
             'payMedhod': payMedhod,
+            'receiveAddressId': receiveAddressId,
             'checkoutType': 1    // checkoutType == 1 代表要先建立訂單才能結帳
         } , {
             headers: {
                 'Authentication': accessToken
             }
         })
-
-        console.log(data);
 
         // 綠界sdk會回傳html回來 將不要的元素去掉 重組一個 並觸發submit
         if(data){
@@ -117,6 +156,7 @@ const Checkout = () => {
 
     return (
         <div className="checkout">
+            {changeAddressModalOpen && <ChangeAddressModal setChangeAddressModalOpen={setChangeAddressModalOpen} setSelectedAddressId={setSelectedAddressId}/>}
             <div className="wrap">
                 {/* columnName */}
                 <div className='columnName'>
@@ -135,14 +175,14 @@ const Checkout = () => {
                 <div className='userReceiveAddress'>
                     <div className='receiveInfo'>
                         <p>寄送資訊</p>
-                        <button className='changeReceiveAddress'>變更</button>
+                        <button className='changeReceiveAddress' onClick={() => {setChangeAddressModalOpen(true)}}>變更</button>
                     </div>                    
                     <hr/>
                     <div className='receiveAddress'>
-                        <p>全名 : sdfsdf</p>
-                        <p>手機 : 0934329737</p>
-                        <p>超商 : 全家 台醫店</p>
-                        <p>地址 : xx路xx段xx號</p>
+                        <p>全名 : {receiverName}</p>
+                        <p>手機 : {receiverCellPhone}</p>
+                        <p>超商 : {receiverStoreType} {receiverStoreName}</p>
+                        <p>地址 : {receiverAddress}xx路xx段xx號</p>
                     </div>
                 </div>
                 {/* amount */}
@@ -162,7 +202,7 @@ const Checkout = () => {
                     </div>
                     <div id="orderForm"> </div>
                 </div>
-            </div>
+            </div>            
         </div>
     );
 }
