@@ -37,7 +37,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // React.StrictMode
 root.render(
   <>
-    <Router>
+    <Router >
       <Header />
       <Categorys />
       {/* <div style={{height: "100vh"}}> */}

@@ -77,7 +77,7 @@ const Address = () => {
             </div>
             <div className='address'>
                 {
-                    userReceiveAddress ? userReceiveAddress.map(item => <AddressItem key={ item.reveiveAddressId } userReceiveAddress={item} setUserReceiveAddress={setUserReceiveAddress} setDefaultReceiveAddress={setDefaultReceiveAddress}/>) : <p key={ v4() }>目前無設定地址</p>
+                    userReceiveAddress ? userReceiveAddress.map(item => <AddressItem key={ item.receiveAddressId } userReceiveAddress={ item } setUserReceiveAddress={ setUserReceiveAddress } setDefaultReceiveAddress={ setDefaultReceiveAddress }/>) : <p key={ v4() }>目前無設定地址</p>
                 }
             </div>
             <div id="addressForm" hidden> </div>

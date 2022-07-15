@@ -7,7 +7,7 @@ import { URL } from "../../../global/url";
 
 const AddressItem = ( props ) => {
 
-    const { reveiveAddressId , receiverName , receiverCellPhone , reveiverStoreType , receiverAddress , receiverStoreName , defaultAddress } = props.userReceiveAddress
+    const { receiveAddressId , receiverName , receiverCellPhone , receiverStoreType , receiverAddress , receiverStoreName , defaultAddress } = props.userReceiveAddress
     const { setUserReceiveAddress , setDefaultReceiveAddress } = props
 
     // 刪除地址
@@ -19,13 +19,13 @@ const AddressItem = ( props ) => {
                 'Authentication': accessToken
             },
             data: {
-                'reveiveAddressId': reveiveAddressId
+                'receiveAddressId': receiveAddressId
             }
         })
 
         if ( data ) {
             setUserReceiveAddress((prev) => {
-                return prev.filter(item => item.reveiveAddressId !== reveiveAddressId)
+                return prev.filter(item => item.receiveAddressId !== receiveAddressId)
             })
         }
     }
@@ -35,7 +35,7 @@ const AddressItem = ( props ) => {
         const accessToken = Cookies.get('accessToken')
         const url = `${URL}/userReceiveAddress/changeDefaultReceiveAddress`
         const { data } = await axios.post(url,{
-            'reveiveAddressId': reveiveAddressId
+            'receiveAddressId': receiveAddressId
         },{
             headers: {
                 'Authentication': accessToken
@@ -56,7 +56,7 @@ const AddressItem = ( props ) => {
                 {defaultAddress == 1 ? <p className="defaultAddress">預設</p> : null }
             </div>
             <p>手機 : {receiverCellPhone}</p>
-            <p>超商 : {reveiverStoreType} {receiverStoreName}</p>
+            <p>超商 : {receiverStoreType} {receiverStoreName}</p>
             <p>地址 : {receiverAddress}xx路xx段xx號</p>
             <div className="addressAction">
                 <button className="setDefaultAddress" onClick={setDefault}>設定為預設</button>
