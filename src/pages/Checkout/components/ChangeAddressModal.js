@@ -19,7 +19,7 @@ const ChangeAddressModal = ( props ) => {
         getUserReceiveAddress()
     },[])
 
-    // 撈使用者收件地址資料
+    // 撈使用者所有收件地址資料
     const getUserReceiveAddress = async () => {
         const accessToken = Cookies.get('accessToken')
         const url = `${URL}/userReceiveAddress`

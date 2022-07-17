@@ -140,18 +140,29 @@ const Checkout = () => {
             }
         })
 
-        // 綠界sdk會回傳html回來 將不要的元素去掉 重組一個 並觸發submit
-        if(data){
-            // 去掉不要的元素
-            let ret = data.replace('<script type="text/javascript">document.getElementById("ecpay-form").submit();</scr', '')
-            ret = ret.replace('ipt></body></html>', '')
-            ret = ret.replace('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>', '')
+        console.log(data);
 
-            // 把取出的html塞入<div id='orderForm'>內 並觸發送出
-            const orderForm = document.getElementById('orderForm')
-            orderForm.innerHTML = ret
-            document.getElementById('ecpay-form').submit()
-        }        
+        if(data.payType){
+            switch (data.payType) { // 1->綠界、2->linepay
+                case 1:
+                    // 綠界sdk會回傳html回來 將不要的元素去掉 重組一個 並觸發submit
+                    // 去掉不要的元素
+                    let ecpayPaymentHtml = data.ecpayPaymentHtml
+                    let ret = ecpayPaymentHtml.replace('<script type="text/javascript">document.getElementById("ecpay-form").submit();</scr', '')
+                    ret = ret.replace('ipt></body></html>', '')
+                    ret = ret.replace('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>', '')
+
+                    // 把取出的html塞入<div id='orderForm'>內 並觸發送出
+                    const orderForm = document.getElementById('orderForm')
+                    orderForm.innerHTML = ret
+                    document.getElementById('ecpay-form').submit()
+                break;
+    
+                case 2:
+                    window.location.href = data.redirecturl
+                break;
+            }
+        }       
     }
 
     return (
