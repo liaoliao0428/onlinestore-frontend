@@ -37,7 +37,8 @@
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr;
     text-align: center;
-    align-items: center; 
+    align-items: center;
+    width: 100%; 
 }
 
 .checkoutProductBasic img {
@@ -49,7 +50,46 @@
     font-size: 20px;
 }
 
-/* checkoutCheck */
+/* userReceiveAddress */
+.userReceiveAddress {
+    margin-top: 10px;
+    border: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    padding: 15px 40px 15px 40px;
+    color: #5b5b5b;
+    font-size: 18px;
+}
+
+.receiveInfo {
+    display: flex;
+    align-items: center;
+}
+
+.changeReceiveAddress {
+    margin-left: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor:pointer;
+    color: #565656;
+}
+
+.changeReceiveAddress:hover {
+    background-color: #ebebeb;
+}
+
+.receiveAddress {
+    width: 15%;
+    font-size: 18px;
+    color: #5b5b5b;
+}
+
+.receiveAddress p {
+    margin: 10px 0; 
+}
+
+/* amount */
 .amount {
     margin-top: 30px;
     border: 1px solid #e7e7e7;
@@ -62,6 +102,15 @@
 
 .amount p {
     margin: 20px 0;
+}
+
+.payMedhod {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.payMedhod input {
+    margin-left: 30px;
 }
 
 .checkoutCheck {
@@ -81,5 +130,81 @@
     cursor:pointer;
     text-decoration:none;
     text-align: center;
+}
+
+/* modal */
+.changeAddressModalBackground {
+    width: 100vw;
+    background-color: rgba(200, 200, 200 , 0.0);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.changeAddressModalContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.changeAddressModalCloseBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ebebeb;
+}
+  
+.changeAddressModalCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.changeAddress {
+    overflow-y:auto;
+    box-sizing: border-box;
+}
+
+.changeAddressItem {
+    margin: 20px 20px 0 0;
+    border: 1px solid #ebebeb;
+    padding: 10px 20px;
+}
+
+.changeAddressItem p {
+    margin-top: 3px;
+}
+
+.selectAddress {
+    background-color: #ffffff;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor:pointer;
+    color: #565656;
+    margin-top: 10px;
+}
+
+.selectAddress:hover {
+    background-color: #ebebeb;
+}
+
+.selectedAddress {
+    background-color: #00bfa5;
+    color: #ffffff;
+    margin-left: 10px !important;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight:bold
 }
 

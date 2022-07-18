@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 import OrderItem from './OrderItem';
 
 const Order = () => {
-    console.log('訂單');
+    
     const [orderStateActive , setOrderStateActive] = useState('1')
 
     const  a  = [1, 2, 3]

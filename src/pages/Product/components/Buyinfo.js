@@ -8,9 +8,11 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 // Url
 import { URL } from '../../../global/url'
+// route
+import { useNavigate  } from 'react-router-dom'
 
 const Buyinfo = ( props ) => {
-
+    const history = useNavigate();
     const { product , detail } = props
     let productName = product.productName
     let length = detail.length
@@ -44,8 +46,8 @@ const Buyinfo = ( props ) => {
         Math.floor(e.target.value) < Math.floor(quantity) ? setBuyQuantity(e.target.value) : setBuyQuantity(quantity)       
     }
 
-    // 商品加入購物車
-    const productAddToCart = async () => {
+    // 馬上購買
+    const buyProductNow = async () => {
         let accessToken = Cookies.get('accessToken')
         let url = `${URL}/cart/insert`
 
@@ -53,12 +55,6 @@ const Buyinfo = ( props ) => {
             alert('請選擇正確商品')
             return false
         }
-
-        // const { data } = await axios.post(url,{
-        //     'accessToken': accessToken,
-        //     'productDetailId': selectProductDetailId,
-        //     'quantity': buyQuantity
-        // })
 
         const { data } = await axios.post(url , {
             'productDetailId': selectProductDetailId,
@@ -69,11 +65,40 @@ const Buyinfo = ( props ) => {
             }
         })
 
-        if (data) {
+        if ( data[0] ) {
+            // window.location.href = "/cart"
+            history('/cart')
+            return false
+        }else{
+            history('/login')            
+            return false
+        }
+    }
+
+    // 商品加入購物車
+    const addProductToCart = async () => {
+        let accessToken = Cookies.get('accessToken')
+        let url = `${URL}/cart/insert`
+
+        if (!selectProductDetailId) {
+            alert('請選擇正確商品')
+            return false
+        }
+
+        const { data } = await axios.post(url , {
+            'productDetailId': selectProductDetailId,
+            'quantity': buyQuantity
+        } ,{
+            headers: {
+                'Authentication': accessToken
+            }
+        })
+
+        if ( data[0] ) {
             alert('商品已加入購物車')
             return false
         }else{
-            alert('錯誤')
+            history('/login')
             return false
         }
     }
@@ -92,8 +117,8 @@ const Buyinfo = ( props ) => {
             <h3>數量</h3>
             <input type="number" value={buyQuantity} onChange={(e) => changeBuyQuantity(e)}/>
             <h3>剩餘{quantity}件</h3>
-            <button className="buynow">直接購買</button>
-            <button className="cart" onClick={productAddToCart}><i className="fa-solid fa-cart-shopping"></i> 放入購物車</button>
+            <button className="buynow" onClick={buyProductNow}>直接購買</button>
+            <button className="cart" onClick={addProductToCart}><i className="fa-solid fa-cart-shopping"></i> 放入購物車</button>
             <p>付款後，從備貨到寄出商品為 3 個工作天。（不包含假日）</p>
             <p>商成統一使用綠界發票</p>
         </div>
