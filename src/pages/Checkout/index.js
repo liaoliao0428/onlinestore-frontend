@@ -140,8 +140,6 @@ const Checkout = () => {
             }
         })
 
-        console.log(data);
-
         if(data.payType){
             switch (data.payType) { // 1->綠界、2->linepay
                 case 1:
@@ -159,6 +157,7 @@ const Checkout = () => {
                 break;
     
                 case 2:
+                    // linepay會回傳付款網址 直接轉址
                     window.location.href = data.redirecturl
                 break;
             }
