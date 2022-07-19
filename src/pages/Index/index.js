@@ -15,6 +15,7 @@ const Index = (props) => {
             <Banner />
             <Products categoryId={categoryId}/>
         </div>
+
     )
 }
 

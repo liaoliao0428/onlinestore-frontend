@@ -57,7 +57,7 @@ const Cart = () => {
             alert('尚未選擇結帳商品')
             return null
         }else{
-            history(`/checkout/?state=${selectCartProductBase64}`)
+            history(`/checkout/?checkoutType=1&state=${selectCartProductBase64}`)
         }
     }
 
