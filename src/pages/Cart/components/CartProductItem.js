@@ -8,7 +8,6 @@ import { URL } from '../../../global/url';
 import { useRef } from 'react';
 
 const CartProductItem = (props) => {
-
     const { detail , setCartProduct , setSelectCartProduct , setTotalPrice } = props
     const { image , productDetailId , productName , quantity , specification , unitPrice } = detail
     const productCheckRef = useRef(false)

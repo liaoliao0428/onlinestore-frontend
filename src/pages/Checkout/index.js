@@ -41,7 +41,9 @@ const Checkout = () => {
     // 取網址傳的search參數
     const [ searchParams ]  = useSearchParams()
     const productState = searchParams.get('state')
-    const checkoutPorudctDetailIds = JSON.parse(base64.decode(productState)) 
+    const checkoutPorudctDetailIds = JSON.parse(base64.decode(productState))
+    const checkoutType = searchParams.get('checkoutType')
+
     
     // 取要結帳的商品資料
     useEffect(() => {
@@ -69,7 +71,6 @@ const Checkout = () => {
     useEffect(() => {
         setTotalPrice((prev) => {
             return Math.floor(prev) + Math.floor(productTotalPrice)
-            
         })
     }, [productTotalPrice])
 
@@ -78,7 +79,8 @@ const Checkout = () => {
         const accessToken = Cookies.get('accessToken')
         const url = `${URL}/checkout/product`
         const { data } = await axios.post(url, {
-            'checkoutPorudctDetailIds': checkoutPorudctDetailIds
+            'checkoutPorudctDetailIds': checkoutPorudctDetailIds,
+            'checkoutType': checkoutType
         } , {
             headers: {
                 'Authentication': accessToken
@@ -127,25 +129,41 @@ const Checkout = () => {
     const checkout = async () => {
         const accessToken = Cookies.get('accessToken')
         const url = `${URL}/checkout`
-        const { data } = await axios.post(url , {
-            'checkoutProducts': checkoutProducts,
-            'productTotalPrice': productTotalPrice,
-            'totalPrice': totalPrice,
-            'payMedhod': payMedhod,
-            'receiveAddressId': receiveAddressId,
-            'checkoutType': 1    // checkoutType == 1 代表要先建立訂單才能結帳
-        } , {
-            headers: {
-                'Authentication': accessToken
-            }
-        })
 
-        if(data.payType){
-            switch (data.payType) { // 1->綠界、2->linepay
+        let response = ''
+        if (checkoutType == 1) {
+            response = await axios.post(url , {
+                'checkoutProducts': checkoutProducts,
+                'productTotalPrice': productTotalPrice,
+                'totalPrice': totalPrice,
+                'payMedhod': payMedhod,
+                'receiveAddressId': receiveAddressId,
+                'checkoutType': 1    // checkoutType == 1 代表要先建立訂單才能結帳
+            } , {
+                headers: {
+                    'Authentication': accessToken
+                }
+            })
+        }else{
+            response = await axios.post(url , {
+                'orderNumber': checkoutType,
+                'payMedhod': payMedhod,
+                'checkoutType': 2    // checkoutType == 2 代表已經有訂單直接結帳
+            } , {
+                headers: {
+                    'Authentication': accessToken
+                }
+            })
+        }        
+
+        console.log(response);
+
+        if(response.data.payType){
+            switch (response.data.payType) { // 1->綠界、2->linepay
                 case 1:
                     // 綠界sdk會回傳html回來 將不要的元素去掉 重組一個 並觸發submit
                     // 去掉不要的元素
-                    let ecpayPaymentHtml = data.ecpayPaymentHtml
+                    let ecpayPaymentHtml = response.data.ecpayPaymentHtml
                     let ret = ecpayPaymentHtml.replace('<script type="text/javascript">document.getElementById("ecpay-form").submit();</scr', '')
                     ret = ret.replace('ipt></body></html>', '')
                     ret = ret.replace('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>', '')
@@ -158,7 +176,7 @@ const Checkout = () => {
     
                 case 2:
                     // linepay會回傳付款網址 直接轉址
-                    window.location.href = data.redirecturl
+                    window.location.href = response.data.redirecturl
                 break;
             }
         }       
