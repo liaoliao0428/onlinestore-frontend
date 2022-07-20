@@ -42,6 +42,7 @@ const Header = () => {
             setUserName(userName)
             setLoginState(1)
         }else{
+            setLoginState(0)
             history('/login')
         } 
     }
