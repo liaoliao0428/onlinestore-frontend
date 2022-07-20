@@ -41,6 +41,9 @@ const Header = () => {
 
             setUserName(userName)
             setLoginState(1)
+        }else{
+            setLoginState(0)
+            history('/login')
         } 
     }
 
@@ -54,7 +57,7 @@ const Header = () => {
 
     let loginComponent
     {
-        if(loginState == 0)
+        if(loginState === 0)
             loginComponent = <Link type="button" className="login-logout" to="/login">登入/註冊</Link>
         else
             loginComponent = <Link to="/user/profile" type="button" className="userIcon"><img src={userImage} alt="" /><p>{userName}</p></Link>
