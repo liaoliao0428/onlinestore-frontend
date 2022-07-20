@@ -92,7 +92,7 @@ const OrderItem = ( props ) => {
     
     return (
         <div className="orderItem">
-            <Link to='/login'>
+            <Link to={`/user/order/detail/${orderNumber}`}>
                 <p>訂單編號 : {orderNumber}</p>
                 <p>訂單狀態 : {orderStatusName}</p>
                 <p>訂單金額 : ${amount}</p>
@@ -109,10 +109,8 @@ const OrderItem = ( props ) => {
                 orderStatus == 4 ? <button className="finishOrder orderActionButton" onClick={finishOrder}>完成訂單</button> : null
             } 
             {
-                orderStatus == 5 ? <button className="returnOrder orderActionButton" onClick={returnOrderApply}>申請退貨</button> : null
-            }
-            
-                       
+                orderStatus == 4 || orderStatus == 5 ? <button className="returnOrder orderActionButton" onClick={returnOrderApply}>申請退貨</button> : null
+            }                     
         </div>
     );
 }

@@ -31,7 +31,7 @@ const User = () => {
                     <Routes>
                         <Route path='/profile' element={<Profile/>}/>
                         <Route path='/address' element={<Address />}/>
-                        <Route path='/order' element={<Order />}/>
+                        <Route path='/order/*' element={<Order />}/>
                     </Routes>
                 </div>
             </div>
