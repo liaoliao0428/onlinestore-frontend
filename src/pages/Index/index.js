@@ -6,14 +6,12 @@ import { useParams } from "react-router-dom";
 import Banner from './components/Banner.js';
 import Products from './components/Products.js';
 
-const Index = (props) => {
-
-    let { categoryId } = useParams()
+const Index = () => {
 
     return (
         <div>
             <Banner />
-            <Products categoryId={categoryId}/>
+            <Products />
         </div>
 
     )

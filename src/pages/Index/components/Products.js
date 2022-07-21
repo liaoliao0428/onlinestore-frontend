@@ -9,28 +9,36 @@ import { useState , useEffect } from 'react'
 
 // URL
 import { URL } from '../../../global/url'
+// useParams
+import { useParams , useSearchParams , useNavigate } from 'react-router-dom'
 
 import Item from './Item'
 
 const Products = (props) => {
-    let { categoryId } = props
-
-    // 取得所有商品 有分類id取有分類 沒有取全部
-    const getProducts = async (categoryId, setProducts) => {
-        let url = `${URL}/product/all`
-        let response = await axios.post(url,{
-            categoryId: categoryId
-        })
-        let { products } = response.data
-        setProducts(products)
-    }
-
-    // 使用hook
+    const history = useNavigate();
+    const { categoryId } = useParams()
+    const [ searchParams ]  = useSearchParams()
+    const keyword = searchParams.get('keyword')
     const [products , setProducts] = useState([])
 
+    // 選擇分類換商品
     useEffect(() => {
-        getProducts(categoryId, setProducts)
-    },[categoryId]);
+        getProducts()
+    },[ categoryId , keyword ]);
+
+    // 取得所有商品 有分類id取有分類 沒有取全部
+    const getProducts = async () => {
+
+        const url = `${URL}/product/all`
+        const { data } = await axios.post(url,{
+            'categoryId': categoryId,
+            'keyword': keyword
+        })
+
+        if(data.products){
+            setProducts(data.products)
+        }
+    }    
 
     return (
         <div className="products">

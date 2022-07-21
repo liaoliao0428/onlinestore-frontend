@@ -44,11 +44,11 @@ root.render(
         {/* 註冊路由 */}
         <Routes >
             {/* 無指定路由就帶到首頁 */}
-            <Route path='/' element={<Navigate to='/index' />} />
+            <Route path='/*' element={<Navigate to='/index' />} />
             {/* 登入 */}
-            <Route path='/login/*' element={<Login />}/>
+            <Route path='/login' element={<Login />}/>
             {/* 首頁 */}
-            <Route path='/index' element={<Index />}/>
+            <Route path='/index/*' element={<Index />}/>
             {/* 單商品頁 */}
             <Route path='/product/:productId' element={<Product />}/>
             {/* 指定分類頁 */}
