@@ -13,12 +13,13 @@
     align-items: center;
 }
 
-.header .search a {
+.toInedx {
     margin-right: 10px;
     text-decoration: none;
     color: #000;  
     font-size: 18px;  
 }
+
 
 .header .search-bar {
     opacity: .5;
@@ -34,11 +35,34 @@
     padding: 5px 10px;
     background-color: #0a5b8a;
     color: white;
-    border:none
+    border:none;
+    cursor:pointer;
 }
 
 .header .search-submit:hover{
     background-color: #084669;
+}
+
+.searchResultArea {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.result {
+    width: 260px;
+    background-color: #ffff;
+    border: none;
+    padding: 10px 0 10px 10px;
+    text-decoration: none;
+    color: #525252;
+    box-sizing: border-box;
+}
+
+.result:hover {
+    background-color: #f4f4f4;
+    cursor:pointer;
 }
 
 .header .userinfo{
