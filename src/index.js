@@ -5,6 +5,9 @@ import { BrowserRouter as Router , Routes , Route , Navigate } from 'react-route
 
 // css
 import './index.css';
+// 輪播圖css
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // PrivateRoutes
 import PrivateRoutes from './urils/PrivateRoutes';

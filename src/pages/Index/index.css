@@ -1,10 +1,12 @@
+/* slider */
+.slider {
+    margin-bottom: 50px;
+    text-align: -webkit-center;
+}
+
 /* banner */
 .banner {
     margin-top: 15px;
-}
-
-.banner img{
-    width: 100%;
 }
 
 /* products */

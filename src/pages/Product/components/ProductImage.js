@@ -1,12 +1,11 @@
-// uuid套件
-// import { v4 } from 'uuid'
 // hook
 import { useState , useEffect } from 'react'
+// 輪播圖
+import Slider from "react-slick";
 
 const ProductImage = (props) => {
     const { images } = props
     const [ mainImage , setMainImage ] = useState([])
-
 
     const changeMainImage = (image) => {
         setMainImage(image)
@@ -24,9 +23,10 @@ const ProductImage = (props) => {
             <div className="mainImage">
                 <img src={mainImage} alt="大圖" />
             </div>
+            
             <div className="smallImage">
                 {
-                    images.map(item => <div><button key={ item.id } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button></div>)
+                    images.map(item => <button key={ item.id } onClick={() => changeMainImage(item.image)}><img src={item.image} alt="圖片" /></button>)
                 }
             </div>
         </div>
